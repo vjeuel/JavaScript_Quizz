@@ -1,0 +1,96 @@
+* {
+   box-sizing: border-box;
+}
+
+html {
+   background-color: #141A26;
+   font-size: 10px;
+}
+
+
+/* Main */
+main {
+   width: 70%;
+   margin: 0 auto;
+   display: grid;
+   grid-template-rows: 20rem auto 15rem 10rem;
+   align-items: center;
+   justify-items: center;
+   margin-top: 5rem;
+   
+}
+
+h1 {
+   font-family: 'Merriweather', serif;  
+   font-size: 4rem;
+   text-align: center;
+   letter-spacing: 2px;
+   word-spacing: 10px;
+   color: #F2CB05; 
+   margin-bottom: 3rem;
+}
+
+p {
+   font-family: 'Overpass', sans-serif;
+   letter-spacing: 1px;
+   word-spacing: 5px;
+   line-height: 2;
+}
+
+a {
+   font-family: 'Merriweather', serif;  
+   letter-spacing: 1px;
+   word-spacing: 5px;
+}
+
+p, a {
+   font-size: 2.5rem;
+   text-align: center;
+   color: #C9EBF2;
+   text-decoration: none;
+}
+
+.title {
+}
+
+main .button {
+   padding: 1.5rem 5rem;
+   background-color: #F28705;
+   border-radius: 1rem;
+   box-shadow: inset 0 0 5px black,
+               0 0 10px #C9EBF2;
+
+
+}
+
+main .button:hover {
+   background-color: #F2CB05;
+   color: #141A26;
+   transition: ease-in-out 1s;
+}
+
+
+/* COLORS */
+/* Color Theme Swatches in Hex */
+.Hole-in-the-Dramatic-Clouds-1-hex { color: #141A26; }
+.shopDisney-1-hex { color: #D92332; }
+.shopDisney-2-hex { color: #C9EBF2; }
+.shopDisney-3-hex { color: #F2CB05; }
+.shopDisney-4-hex { color: #F29F05; }
+.shopDisney-5-hex { color: #F28705; }
+
+/* Color Theme Swatches in RGBA */
+.Hole-in-the-Dramatic-Clouds-1-rgba { color: rgba(19, 26, 38, 1); }
+.shopDisney-1-rgba { color: rgba(216, 34, 49, 1); }
+.shopDisney-2-rgba { color: rgba(201, 234, 242, 1); }
+.shopDisney-3-rgba { color: rgba(242, 202, 4, 1); }
+.shopDisney-4-rgba { color: rgba(242, 159, 4, 1); }
+.shopDisney-5-rgba { color: rgba(242, 135, 4, 1); }
+
+
+/* FONTS */
+/* 
+font-family: 'Merriweather', serif;
+
+font-family: 'Overpass', sans-serif;
+ */
