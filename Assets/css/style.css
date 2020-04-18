@@ -1,4 +1,4 @@
-* {
+*, *::before, *::after {
    box-sizing: border-box;
 }
 
@@ -9,15 +9,14 @@ html {
 
 
 /* Main */
-#first-page {
-   width: 50%;
+main {
+   width: 70%;
+   height: 100vh;
    margin: 0 auto;
    display: grid;
-   grid-template-rows: 20rem auto 15rem 10rem;
+   grid-template-rows: 15rem auto 15rem;
    align-items: center;
    justify-items: center;
-   margin-top: 5rem;
-   
 }
 
 h1 {
@@ -26,8 +25,8 @@ h1 {
    text-align: center;
    letter-spacing: 2px;
    word-spacing: 10px;
-   color: #F2CB05; 
-   margin-bottom: 3rem;
+   line-height: 1.5;
+   color: #F2CB05;
 }
 
 p {
@@ -50,54 +49,54 @@ p, a {
    text-decoration: none;
 }
 
-.ready-button {
-   padding: 1.5rem 5rem;
-   background-color: #F28705;
-   border-radius: 1rem;
-   box-shadow: inset 0 0 5px black,
-   0 0 10px #C9EBF2;
-   
-   
-}
-
-.ready-button:hover {
-   background-color: #3F730A;
-   color: #141A26;
-   transition: ease-in-out 1s;
-}
-
-
-/* QUIZ - PAGE */
-#quiz-pages {
-   width: 50%;
-   margin: 10rem auto;
-   display: grid;
-}
-
-#quiz-box {
-   display: grid;
-   grid-template-rows: auto auto 40rem ;
-   grid-gap: 5rem;
-
-}
-
-.btn-grid {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-   grid-template-rows: auto auto;
-   grid-gap: 3rem;
-   align-items: center;
-}
-
-.btn {
+#ready-button {
    padding: 1.5rem 5rem;
    background-color: #F28705;
    border-radius: 1rem;
    box-shadow: inset 0 0 5px black,
                0 0 10px #C9EBF2;
-   padding: 2rem;
+}
+
+#ready-button:hover {
+   background-color: #F2CB05;
+   color: #141A26;
+   transition: ease-in-out 1s;
+}
+
+#quiz-box {
+   display: grid;
+   grid-template-rows: auto 1fr;
+   grid-gap: 5rem;
+}
+
+.hide {
+   display: none;
+}
+
+.btn-grid {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+
+   /* grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+   grid-template-rows: auto auto;
+   grid-gap: 3rem; */
+   align-items: center;
+   margin-bottom: 5rem;
+}
+
+.btn {
+   max-width: 50rem;
+   width: 35rem;
+   padding: 1.5rem 5rem;
+   background-color: #F28705;
+   border-radius: 1rem;
+   box-shadow: inset 0 0 5px black,
+               0 0 10px #C9EBF2;
+   margin: 2rem;
    
 }
+
 
 
 

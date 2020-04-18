@@ -10,15 +10,29 @@
    <title>JavaScript Quiz</title>
 </head>
 <body>
-   <main id="first-page">
+   <main>
       <div class="title">
          <h1>Coding Quiz Challenge</h1>
       </div>
-      <p>Try to answer the following code-related questions within the time limit.
-         Keep in mind that incorrect answers will penalize your score time by ten seconds!
-      </p>
-      <a class="ready-button" href="quiz.html">Are you ready?</a>
-      <p class="timer">90 seconds</p>
+      <div class="quiz-container">
+         <div id="quiz-box" class="hide">
+            <div id="questions">
+               <p>Try to answer the following code-related questions within the time limit.
+         Keep in mind that incorrect answers will penalize your score time by ten seconds!</p>
+            </div>
+            <a id="ready-button">Are you ready?</a>
+            <div id="answer-btns" class="btn-grid hide">
+               <a class="btn">Answer 1</a>
+               <a class="btn">Answer 2</a>
+               <a class="btn">Answer 3</a>
+               <a class="btn">Answer 4</a>
+            </div>
+            
+            
+         </div>
+         <div>
+            <p id="timer">90<br>seconds</p>
+         </div>
    </main>
 
 
