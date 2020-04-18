@@ -9,8 +9,8 @@ html {
 
 
 /* Main */
-main {
-   width: 70%;
+#first-page {
+   width: 50%;
    margin: 0 auto;
    display: grid;
    grid-template-rows: 20rem auto 15rem 10rem;
@@ -50,30 +50,62 @@ p, a {
    text-decoration: none;
 }
 
-.title {
-}
-
-main .button {
+.ready-button {
    padding: 1.5rem 5rem;
    background-color: #F28705;
    border-radius: 1rem;
    box-shadow: inset 0 0 5px black,
-               0 0 10px #C9EBF2;
-
-
+   0 0 10px #C9EBF2;
+   
+   
 }
 
-main .button:hover {
-   background-color: #F2CB05;
+.ready-button:hover {
+   background-color: #3F730A;
    color: #141A26;
    transition: ease-in-out 1s;
 }
 
 
+/* QUIZ - PAGE */
+#quiz-pages {
+   width: 50%;
+   margin: 10rem auto;
+   display: grid;
+}
+
+#quiz-box {
+   display: grid;
+   grid-template-rows: auto auto 40rem ;
+   grid-gap: 5rem;
+
+}
+
+.btn-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+   grid-template-rows: auto auto;
+   grid-gap: 3rem;
+   align-items: center;
+}
+
+.btn {
+   padding: 1.5rem 5rem;
+   background-color: #F28705;
+   border-radius: 1rem;
+   box-shadow: inset 0 0 5px black,
+               0 0 10px #C9EBF2;
+   padding: 2rem;
+   
+}
+
+
+
 /* COLORS */
 /* Color Theme Swatches in Hex */
 .Hole-in-the-Dramatic-Clouds-1-hex { color: #141A26; }
-.shopDisney-1-hex { color: #D92332; }
+.abstract-red-shiny-texture-background-3-hex { color: #A60303; }
+.Green-Urban-Studio-2-hex { color: #3F730A; }
 .shopDisney-2-hex { color: #C9EBF2; }
 .shopDisney-3-hex { color: #F2CB05; }
 .shopDisney-4-hex { color: #F29F05; }
@@ -81,7 +113,8 @@ main .button:hover {
 
 /* Color Theme Swatches in RGBA */
 .Hole-in-the-Dramatic-Clouds-1-rgba { color: rgba(19, 26, 38, 1); }
-.shopDisney-1-rgba { color: rgba(216, 34, 49, 1); }
+.abstract-red-shiny-texture-background-3-rgba { color: rgba(165, 3, 3, 1); }
+.Green-Urban-Studio-2-rgba { color: rgba(63, 114, 10, 1); }
 .shopDisney-2-rgba { color: rgba(201, 234, 242, 1); }
 .shopDisney-3-rgba { color: rgba(242, 202, 4, 1); }
 .shopDisney-4-rgba { color: rgba(242, 159, 4, 1); }
