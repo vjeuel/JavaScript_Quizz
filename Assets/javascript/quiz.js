@@ -11,16 +11,16 @@ let mixedQuestions, currentQuestion;
 
 // ----------  TIMER  ---------- //
 var remainTime = 90;
-
-var countdown = setInterval(function () {
-   if (remainTime <= 0) {
-      return remainTime; // Got to add here the last page
-   } else {
-      document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
-   }
-   remainTime -= 1;
-}, 1000);
-
+const countdown = document.getElementById("ready-button").onclick = function countdown() {
+   setInterval(function countdownF() {
+      if (remainTime <= 0) {
+         return remainTime; // Got to add here the last page
+      } else {
+         document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
+      }
+      remainTime -= 1;
+   }, 1000);
+};
 
 // ----------  START GAME  ---------- //
 window.onload = function hideAnswerButtons() {
@@ -33,14 +33,33 @@ readyButtonElement.addEventListener("click", startGame);
 
 function startGame() {
    readyButtonElement.classList.add("hide");
+   // document.getElementById("intro").style.display = "none";
    document.getElementById("answer-btns").style.display = "";
    document.getElementById("timer").style.display = "";
+   mixedQuestions = questions.sort(() => Math.random() - 0.5);
+   currentQuestion = 0;
 };
 
 // ----------  CONTINUE GAME  ---------- //
-function nextQuestion() { 
-
+function nextQuestion() {
+   showQuestion(mixedQuestions[currentQuestion]);
 };
+
+function showQuestion(question) {
+   questionElement.innerText = question.question;
+   question.answers.forEach(answer => {
+      const button = document.createElement("button");
+      button.innerText = answer.text;
+      button.classList.add("btn");
+      if (answer.correct) {
+         button.dataset.correct = answer.correct;
+      };
+      button.addEventListener("click", pcikAnswer);
+      answerBtnsElement.appendChild(button);
+   });
+};
+
+
 
 
 function pickAnswer() { 
@@ -53,6 +72,12 @@ function pickAnswer() {
 
 
 // ----------  QUESTIONS  ---------- //
+// function questions(question, answers, correct) {
+//    this.quizQuestion = question;
+//    this.quizAnswers = answers;
+//    this.quizCorrect = correct;
+// }
+
 const questions = [
    {
       question: "What's the meaning of JS?",
