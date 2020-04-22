@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./Assets/css/reset.css">
+   <link rel="stylesheet" href="./Assets/css/style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Overpass:wght@300&display=swap" rel="stylesheet">
+   
+   <title>JavaScript Quiz</title>
+</head>
+<body>
+   <main>
+      <!-- Introduction of the Game -->
+      <div class="title">
+         <h1 id="page-title">Coding Quiz Challenge</h1>
+      </div>
+      <div class="quiz-container">
+         <div id="quiz-box" class="hide">
+            <div id="intro-box" class="start">
+               <p id="intro">
+               Try to answer the following code-related questions within the time limit.
+               Keep in mind that incorrect answers will penalize your score time by ten seconds!
+              </p>
+            </div>
+            <a id="ready-button">Are you ready?</a>
+
+            <!-- Start Game | Questions and Answers -->
+            <div id="quizQuestion" class="hide">
+               <p id="question-title"></p>
+               <div id="choices" class="choices"></div>
+            </div>
+            <div id="answer-btns" class="btn-grid hide">
+            </div>
+
+            <!-- Game Over | Score and High Score -->
+            <div id="quizQuestion" class="hide">
+               <p id="question-title"></p>
+               <div id="choices" class="choices"></div>
+            </div>
+            <div id="answer-btns" class="btn-grid hide">
+            </div>
+         </div>
+      </div>
+      
+      <div>
+         <!-- Timer with time deduction -->
+         <p id="timer">90<br>seconds</p>
+      </div>
+   </main>
+
+
+
+
+
+   
+   <script type="text/javascript" src="./Assets/javascript/quiz.js"></script>
+</body>
+</html>

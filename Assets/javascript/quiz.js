@@ -1,4 +1,3 @@
-
 // ----------  QUIZ QUESTIONS  ---------- //
 var questions = [
    {
@@ -23,20 +22,27 @@ var questions = [
    }
 ];
 
-// ----------  MAIN VARIABLES  ---------- //
-var readyButtonElement = document.getElementById("ready-button");
-var quizBoxElement = document.getElementById("quiz-box");
-var questionElement = document.getElementById("questions");
-var quizQuestionElement = document.getElementById("quizQuestion");
-var currentQuestionIndex = 0;
-var optionElement = document.getElementById("answer-btns");
 
-var introTextElement = document.getElementById("intro");
-var quizTitleElement = document.getElementById("question-title");
+// ----------  ID Variables  ---------- //
+var pageTitleEl = document.getElementById("pageTitle");
+var boxEl = document.getElementById("box");
+var timerEl = document.getElementById("timer");
+var buttonsBoxEl = document.getElementById("buttonsBox")
+
+
+// ----------  Class Variables  ---------- //
+var introEl = document.querySelector(".intro");
+var introButtonEl = document.querySelector(".introButton");
+var questionButtonEl = document.querySelector(".questionButton");
+var questionsEl = document.querySelector(".questions");
+
+// ----------  Other Variables  ---------- //
+var currentQuestionIndex = 0;
+
 
 // ----------  TIMER  ---------- //
 var remainTime = 90;
-const countdown = document.getElementById("ready-button").onclick = function countdown() {
+var countdown = document.querySelector(".introButton").onclick = function countdown() {
    setInterval(function countdownF() {
       if (remainTime <= 0) {
          return remainTime; // Got to add here the last page
@@ -47,94 +53,87 @@ const countdown = document.getElementById("ready-button").onclick = function cou
    }, 1000);
 };
 
-// ----------  START GAME  ---------- //
-window.onload = function hideAnswerButtons() {
-   document.getElementById("answer-btns").style.display = "none";
-   document.getElementById("timer").style.display = "none";
-   introTextElement.classList.remove("hide");
-};
 
+// ----------  FIRST PAGE  ---------- //
+function firstPage() {
+   pageTitleEl.textContent = "Coding Quiz Challenge";
+   introEl.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds!";
+   
+   introButtonEl.textContent = "Ready?"
+};
+firstPage();
+
+// ----------  START GAME  ---------- //
+introButtonEl.addEventListener("click", startGame);
 
 function startGame() {
-   console.log("start")
-
-   quizQuestionElement.classList.remove("hide");   
-   readyButtonElement.classList.add("hide");
-   introTextElement.classList.add("hide");
-   document.getElementById("answer-btns").style.display = "";
-   document.getElementById("timer").style.display = "";
-};
-
-readyButtonElement.addEventListener("click", startGame);
-
-
-
-// ----------  CONTINUE GAME  ---------- //
-function showQuestion() {
-   var currentQuestion = questions[currentQuestionIndex];
+   countdown;
    
-   optionElement.innerHTML = "";
-   
-   quizTitleElement.textContent = currentQuestion.question;
-   currentQuestion.answers.forEach(function (choice, i) {
-      var optionNode = document.createElement("button");
-      optionNode.setAttribute("class", "btn");
-      optionNode.setAttribute("value", choice);
-      optionNode.textContent = choice;
-      optionNode.onclick = questionClick;
+   // ----------  Show Questions  ---------- //
+   function showQuestion() {
+      var currentQuestion = questions[currentQuestionIndex];
       
-      optionElement.appendChild(optionNode);
-      
-      function questionClick() {
-         if (this.value == questions[currentQuestionIndex].correct) {
-            console.log("correct");
-            
-            currentQuestionIndex++;
-         } else {
-            if (remainTime > 10) {
-               remainTime -= 10;
-            } else {
-               remainTime = 1;
-            }
-            console.log("incorrect");
-            currentQuestionIndex++;
-            
-         }
-         console.log(currentQuestionIndex)
-         showQuestion();
+      if (currentQuestionIndex == questions.length) {
+         endGame();
       };
-   });
-};
-
-showQuestion();
-
-// ----------  GAME OVER  ---------- //
-function gameOver() {
-   if (remainTime == 0) {
-      window.location.href = "gameover.html";
-   }
-   
-};
-
       
-// ----------  Check ANSWERS  ---------- //
-function checkAnswer(answer) {
-   if (questions[currentQuestion].correct == answer) {
-      // go to next question
-   } else {
-      // deduct 10 seconds from time and got to next question
-   }
+      buttonsBoxEl.innerHTML = "";
+      
+      questionsEl.textContent = currentQuestion.question;
+      currentQuestion.answers.forEach(function (choice, i) {
+         var optionNode = document.createElement("button");
+         
+         optionNode.setAttribute("class", "btn");
+         optionNode.setAttribute("value", choice);
+         optionNode.textContent = choice;
+         optionNode.onclick = questionClick;
+         
+         buttonsBoxEl.appendChild(optionNode);
+         
+         function questionClick() {
+            if (this.value === questions[currentQuestionIndex].correct) {
+               optionNode.style.backgroundColor = "#3F730A";
+               optionNode.style.color = "#C9EBF2";
+               optionNode.textContent = "CORRECT";
+               currentQuestionIndex++;
+
+            } else {
+               if (remainTime > 10) {
+                  remainTime -= 10;
+               } else {
+                  remainTime = 1;
+               }
+               optionNode.style.backgroundColor = "#A60303";
+               optionNode.style.color = "#C9EBF2";
+               optionNode.textContent = "WRONG";
+               currentQuestionIndex++;
+            }
+            setTimeout(showQuestion, 1000);
+         };
+      });
+   };
+   showQuestion();
 };
 
-// ----------  ANSWER IS CORRECT OR WRONG  ---------- //
-function answerIsCorrect() {
-   optionNode.style.backgroundColor = "#3F730A"
-}
-
-function answerIsWrong() {
-   document.getElementById(currentQuestion).style.backgroundColor = "#A60303"
-}
-
-function pickAnswer() { 
-
+// ----------  GAME END  ---------- //
+function endGame() {
+   pageTitleEl.textContent = "Well Done!!!"
 };
+console.log("test");
+
+
+
+
+
+
+
+
+
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
+// ----------  TIMER  ---------- //
