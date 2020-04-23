@@ -85,7 +85,7 @@ main {
    
 }
 
-.btn {
+.btn, submit {
    width: 30rem;
    padding: 1.25rem 5rem;
    background-color: #F28705;
@@ -93,13 +93,24 @@ main {
    box-shadow: inset 0 0 5px black,
    0 0 10px #C9EBF2;
    margin: 1.5rem;
-   
+   text-align: center;
 }
 
 .btn:hover {
    background-color: #F2CB05;
    color: #141A26;
    transition: ease-in-out 0.25s;
+}
+
+input {
+   width: 25rem;
+   border-radius: 1rem;
+   box-shadow: 0 0 10px #F28705;
+   margin-left: 1rem;
+   padding: 1.25rem;
+   font-size: 2.5rem;
+   text-align: center;
+   
 }
 
 

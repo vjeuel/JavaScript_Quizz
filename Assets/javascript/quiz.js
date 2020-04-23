@@ -40,15 +40,17 @@ var scoreEl = document.querySelector(".score");
 
 // ----------  Other Variables  ---------- //
 var currentQuestionIndex = 0;
+var timerCountDown = false;
 
 
 // ----------  TIMER  ---------- //
-var remainTime = 30;
+var remainTime = 10;
 var countdown = document.querySelector(".introButton").onclick = function countdown() {
    setInterval(function countdownF() {
       if (remainTime <= 0) {
+         // clearInterval(countdown);
          endGame();
-         return;
+         
       } else {
          document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
       };
@@ -67,7 +69,8 @@ function firstPage() {
 firstPage();
 
 // ----------  START GAME  ---------- //
-introButtonEl.addEventListener("click", startGame);
+introButtonEl.addEventListener("click", endGame);
+// introButtonEl.addEventListener("click", startGame);
 
 function startGame() {
    countdown;
@@ -77,7 +80,7 @@ function startGame() {
       var currentQuestion = questions[currentQuestionIndex];
       
       
-      if (currentQuestionIndex == questions.length) {
+      if (currentQuestionIndex == questions.length - 1) {
          endGame();
       };
       
@@ -100,7 +103,7 @@ function startGame() {
                optionNode.style.color = "#C9EBF2";
                optionNode.textContent = "CORRECT";
                currentQuestionIndex++;
-
+               
             } else {
                if (remainTime > 10) {
                   remainTime -= 10;
@@ -121,14 +124,33 @@ function startGame() {
 
 // ----------  GAME END  ---------- //
 function endGame() {
+   introButtonEl.style.display = "none";
    pageTitleEl.textContent = "Well Done!!!";
    scoreEl.textContent = `${remainTime} is your score!`;
    timerEl.textContent = "";
+   // timerCountDown = false;
    
    // ----------  Creating the Form  ---------- //
-   var initials = document.createElement("p");
-   pageTitleEl.innerText = "Enter initials: ";
-   buttonsBoxEl.appendChild(initials);
+   // var initials = document.createElement("p");
+   // initials.textContent = "Enter initials: ";
+   // buttonsBoxEl.appendChild(initials);
+   
+   var input = document.createElement("input");
+   input.type = "text";
+   input.name = "initials";
+   input.placeholder = "enter your initials"
+   buttonsBoxEl.appendChild(input);
+
+   var submitButton = document.createElement("submit");
+   var pTag = document.createElement("p");
+   // submit.setAttribute("type", "submit");
+   submitButton.type = "submit";
+   submitButton.textContent = "submit";
+   pTag.textContent = "test";
+   // submitButton.addEventListener("submit");
+
+   buttonsBoxEl.appendChild(submitButton);
+
 
 };
 console.log("final test");
