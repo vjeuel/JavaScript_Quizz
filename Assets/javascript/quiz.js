@@ -35,20 +35,23 @@ var introEl = document.querySelector(".intro");
 var introButtonEl = document.querySelector(".introButton");
 var questionButtonEl = document.querySelector(".questionButton");
 var questionsEl = document.querySelector(".questions");
+var scoreEl = document.querySelector(".score");
+
 
 // ----------  Other Variables  ---------- //
 var currentQuestionIndex = 0;
 
 
 // ----------  TIMER  ---------- //
-var remainTime = 90;
+var remainTime = 30;
 var countdown = document.querySelector(".introButton").onclick = function countdown() {
    setInterval(function countdownF() {
       if (remainTime <= 0) {
-         return remainTime; // Got to add here the last page
+         endGame();
+         return;
       } else {
          document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
-      }
+      };
       remainTime -= 1;
    }, 1000);
 };
@@ -117,9 +120,18 @@ function startGame() {
 
 // ----------  GAME END  ---------- //
 function endGame() {
-   pageTitleEl.textContent = "Well Done!!!"
+   pageTitleEl.textContent = "Well Done!!!";
+   scoreEl.textContent = `${remainTime} is your score!`;
+   timerEl.textContent = "";
+
+   buttonsBoxEl.textContent = "test"
+
+
+
 };
 console.log("test");
+
+
 
 
 
