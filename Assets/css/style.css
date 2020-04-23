@@ -73,6 +73,10 @@ main {
    align-items: center;
 }
 
+#box {
+   min-height: 8rem;
+}
+
 #buttonsBox {
    display: flex;
    flex-wrap: wrap;

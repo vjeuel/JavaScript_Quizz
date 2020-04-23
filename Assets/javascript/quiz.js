@@ -76,6 +76,7 @@ function startGame() {
    function showQuestion() {
       var currentQuestion = questions[currentQuestionIndex];
       
+      
       if (currentQuestionIndex == questions.length) {
          endGame();
       };
@@ -123,13 +124,14 @@ function endGame() {
    pageTitleEl.textContent = "Well Done!!!";
    scoreEl.textContent = `${remainTime} is your score!`;
    timerEl.textContent = "";
-
-   buttonsBoxEl.textContent = "test"
-
-
+   
+   // ----------  Creating the Form  ---------- //
+   var initials = document.createElement("p");
+   pageTitleEl.innerText = "Enter initials: ";
+   buttonsBoxEl.appendChild(initials);
 
 };
-console.log("test");
+console.log("final test");
 
 
 
