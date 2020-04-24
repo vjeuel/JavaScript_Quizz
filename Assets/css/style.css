@@ -77,15 +77,15 @@ main {
    min-height: 8rem;
 }
 
-#buttonsBox {
+#buttonsBox, #formBox {
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
-   
 }
 
 .btn, submit {
+   font-family: 'Merriweather', serif;
    width: 30rem;
    padding: 1.25rem 5rem;
    background-color: #F28705;
@@ -103,16 +103,15 @@ main {
 }
 
 input {
-   width: 25rem;
+   font-family: 'Overpass', sans-serif;
+   width: 30rem;
    border-radius: 1rem;
    box-shadow: 0 0 10px #F28705;
-   margin-left: 1rem;
-   padding: 1.25rem;
+   margin: 1.5rem;
+   padding: 1.75rem;
    font-size: 2.5rem;
-   text-align: center;
-   
+   text-align: center;  
 }
-
 
 /* COLORS */
 /* Color Theme Swatches in Hex */

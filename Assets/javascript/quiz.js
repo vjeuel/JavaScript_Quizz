@@ -28,6 +28,7 @@ var pageTitleEl = document.getElementById("pageTitle");
 var boxEl = document.getElementById("box");
 var timerEl = document.getElementById("timer");
 var buttonsBoxEl = document.getElementById("buttonsBox")
+var formBoxEl = document.getElementById("formBox")
 
 
 // ----------  Class Variables  ---------- //
@@ -40,49 +41,50 @@ var scoreEl = document.querySelector(".score");
 
 // ----------  Other Variables  ---------- //
 var currentQuestionIndex = 0;
-var timerCountDown = false;
 
+// document.querySelector(".introButton").on("click", startGame);
 
 // ----------  TIMER  ---------- //
-var remainTime = 10;
-var countdown = document.querySelector(".introButton").onclick = function countdown() {
-   setInterval(function countdownF() {
-      if (remainTime <= 0) {
-         // clearInterval(countdown);
-         endGame();
-         
-      } else {
-         document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
-      };
-      remainTime -= 1;
+var remainTime = 50;
+function timer() {
+document.querySelector(".introButton").onclick = startCountdown;
+var startCountdown =
+   setInterval(function () {
+      countTimer()
    }, 1000);
+   
+   function countTimer() {
+      document.getElementById("timer").innerHTML = remainTime + "<br>seconds remaining<br>but no pressure";
+      remainTime--;
+      if (remainTime === 0) {
+         clearInterval(startCountdown);
+         endGame();
+      };
+   };
 };
-
-
+         
 // ----------  FIRST PAGE  ---------- //
 function firstPage() {
+   formBoxEl.style.display = "none";
    pageTitleEl.textContent = "Coding Quiz Challenge";
    introEl.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds!";
-   
    introButtonEl.textContent = "Ready?"
 };
 firstPage();
 
 // ----------  START GAME  ---------- //
-introButtonEl.addEventListener("click", endGame);
-// introButtonEl.addEventListener("click", startGame);
+// introButtonEl.addEventListener("click", endGame);
+introButtonEl.addEventListener("click", timer);
+introButtonEl.addEventListener("click", startGame);
+
 
 function startGame() {
-   countdown;
-   
    // ----------  Show Questions  ---------- //
    function showQuestion() {
-      var currentQuestion = questions[currentQuestionIndex];
-      
-      
-      if (currentQuestionIndex == questions.length - 1) {
+      if (currentQuestionIndex == questions.length) {
          endGame();
       };
+      var currentQuestion = questions[currentQuestionIndex];
       
       buttonsBoxEl.innerHTML = "";
       
@@ -96,7 +98,7 @@ function startGame() {
          optionNode.onclick = questionClick;
          
          buttonsBoxEl.appendChild(optionNode);
-         
+
          function questionClick() {
             if (this.value === questions[currentQuestionIndex].correct) {
                optionNode.style.backgroundColor = "#3F730A";
@@ -115,8 +117,10 @@ function startGame() {
                optionNode.textContent = "WRONG";
                currentQuestionIndex++;
             }
-            setTimeout(showQuestion, 1000);
+            
+            setTimeout(showQuestion, 400);
          };
+         
       });
    };
    showQuestion();
@@ -124,11 +128,13 @@ function startGame() {
 
 // ----------  GAME END  ---------- //
 function endGame() {
+   // clearInterval(countdown);
+   buttonsBoxEl.style.display = "none";
    introButtonEl.style.display = "none";
+   formBoxEl.style.display = "";
    pageTitleEl.textContent = "Well Done!!!";
    scoreEl.textContent = `${remainTime} is your score!`;
    timerEl.textContent = "";
-   // timerCountDown = false;
    
    // ----------  Creating the Form  ---------- //
    // var initials = document.createElement("p");
@@ -139,19 +145,17 @@ function endGame() {
    input.type = "text";
    input.name = "initials";
    input.placeholder = "enter your initials"
-   buttonsBoxEl.appendChild(input);
-
+   formBoxEl.appendChild(input);
+   
    var submitButton = document.createElement("submit");
-   var pTag = document.createElement("p");
-   // submit.setAttribute("type", "submit");
+   var aTag = document.createElement("a");
+   formBoxEl.appendChild(submitButton);
+   submitButton.appendChild(aTag);
    submitButton.type = "submit";
-   submitButton.textContent = "submit";
-   pTag.textContent = "test";
-   // submitButton.addEventListener("submit");
-
-   buttonsBoxEl.appendChild(submitButton);
-
-
+   aTag.textContent = "submit";
+   submitButton.setAttribute("class", "btn");
+   
+   
 };
 console.log("final test");
 
