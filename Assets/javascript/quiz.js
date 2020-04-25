@@ -29,6 +29,8 @@ var boxEl = document.getElementById("box");
 var timerEl = document.getElementById("timer");
 var buttonsBoxEl = document.getElementById("buttonsBox")
 var formBoxEl = document.getElementById("formBox")
+var scoresBoxEl = document.getElementById("scoresBox")
+
 
 
 // ----------  Class Variables  ---------- //
@@ -73,9 +75,10 @@ function firstPage() {
 firstPage();
 
 // ----------  START GAME  ---------- //
-// introButtonEl.addEventListener("click", endGame);
-introButtonEl.addEventListener("click", timer);
-introButtonEl.addEventListener("click", startGame);
+introButtonEl.addEventListener("click", endGame);
+// introButtonEl.addEventListener("click", highScores);
+// introButtonEl.addEventListener("click", timer);
+// introButtonEl.addEventListener("click", startGame);
 
 
 function startGame() {
@@ -128,36 +131,115 @@ function startGame() {
 
 // ----------  GAME END  ---------- //
 function endGame() {
-   // clearInterval(countdown);
+   // clearInterval(startCountdown);
    buttonsBoxEl.style.display = "none";
    introButtonEl.style.display = "none";
+   // scoresBoxEl.style.display = "none";
    formBoxEl.style.display = "";
    pageTitleEl.textContent = "Well Done!!!";
    scoreEl.textContent = `${remainTime} is your score!`;
    timerEl.textContent = "";
    
    // ----------  Creating the Form  ---------- //
-   // var initials = document.createElement("p");
-   // initials.textContent = "Enter initials: ";
-   // buttonsBoxEl.appendChild(initials);
-   
    var input = document.createElement("input");
    input.type = "text";
    input.name = "initials";
    input.placeholder = "enter your initials"
    formBoxEl.appendChild(input);
    
-   var submitButton = document.createElement("submit");
-   var aTag = document.createElement("a");
-   formBoxEl.appendChild(submitButton);
-   submitButton.appendChild(aTag);
+   var submitButton = document.createElement("a");
    submitButton.type = "submit";
-   aTag.textContent = "submit";
+   submitButton.textContent = "submit";
    submitButton.setAttribute("class", "btn");
+   formBoxEl.appendChild(submitButton);
+
+   submitButton.addEventListener("click", highScoresPage);
    
    
+   
+   // ----------  SCORES  ---------- //
+   function highScoresPage() {
+      // scoresBoxEl.style.display
+      submitButton.addEventListener("click", highScores);
+   
+      var backButton = document.createElement("a");
+      backButton.type = "submit";
+      backButton.textContent = "Go Back";
+      backButton.setAttribute("class", "btn");
+      scoresBoxEl.appendChild(backButton);
+      
+      var clearButton = document.createElement("a");
+      clearButton.type = "submit";
+      clearButton.textContent = "Clear Scores";
+      clearButton.setAttribute("class", "btn");
+      scoresBoxEl.appendChild(clearButton);
+      
+      function highScores() {
+         pageTitleEl.textContent = "High Scores";
+         introButtonEl.style.display = "none";
+         formBoxEl.style.display = "none";
+      
+         // form = scoresBoxEl
+         // ul = scoreListEl
+         // button = submitButton
+         // input = input
+         // liMaker = scoreList
+         // text = list
+         // items = scores
+      
+         // ----------  Local Storage  ---------- //
+         var scoresArray = [];
+         if (localStorage.getItem("scores")) {
+            scores = JSON.parse(localStorage.getItem("scores"))
+         } else {
+            scoresArray = [];
+         };
+         
+         localStorage.setItem("scores", JSON.stringify(scoresArray));
+         var scoreData = JSON.parse(localStorage.getItem("scores"));
+
+         var scoreList = list => {
+            var li = document.createElement("li");
+            li.textContent = list;
+            scoreListEl.appendChild(li);
+         };
+         
+         submitButton.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            scoresArray.push(initials.value);
+            scoreList(initials.value);
+            initials.value = "";
+         });
+         
+         scoreData.forEach(input => {
+            scoreList(input)
+         });
+         
+         // ----------  Clear Button  ---------- //
+         clearButton.addEventListener("click", function() {
+            localStorage.clear();
+            while (scoreList.firstChild) {
+               scoreList.removeChild(scoreList.firstChild);
+            }
+            scoresArray = [];
+         });
+         
+         // ----------  Clear Button  ---------- //
+         function reloadPage() {
+            var reload = window.location.href = "./index.html";
+         };
+         backButton.addEventListener("click", reloadPage);
+         // Title
+         // Scores list
+         // 2 Buttons - Go back and Clear High Scores
+      };
+   };
 };
-console.log("final test");
+
+
+
+console.log(localStorage);
 
 
 
@@ -165,12 +247,6 @@ console.log("final test");
 
 
 
-
-
-
-
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
 // ----------  TIMER  ---------- //
 // ----------  TIMER  ---------- //
 // ----------  TIMER  ---------- //
