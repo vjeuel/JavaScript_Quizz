@@ -46,7 +46,6 @@ var currentQuestionIndex = 0;
 
 // ----------  TIMER  ---------- //
 var remainTime = 90;
-// document.querySelector(".introButton").onclick = startCountdown;
 var startCountdown = "";
 
 function timer() {
@@ -75,8 +74,6 @@ function firstPage() {
 firstPage();
 
 // ----------  START GAME  ---------- //
-// introButtonEl.addEventListener("click", endGame);
-// introButtonEl.addEventListener("click", highScores);
 introButtonEl.addEventListener("click", timer);
 introButtonEl.addEventListener("click", startGame);
 
@@ -141,19 +138,6 @@ function endGame() {
    timerEl.style.display = "none";
    clearInterval(startCountdown);
    
-   // // ----------  Creating the Form  ---------- //
-   // var inputForm = document.createElement("input"); //add ID or class | Global scope
-   // inputForm.type = "text";
-   // // input.name = "initials";
-   // inputForm.placeholder = "enter your initials"
-   // formBoxEl.appendChild(inputForm);
-   
-   // var submitButton = document.createElement("a");
-   // submitButton.type = "submit";
-   // submitButton.textContent = "submit";
-   // submitButton.setAttribute("class", "btn");
-   // formBoxEl.appendChild(submitButton);
-   
    
    //----------  SCORES  ---------- //
    var backButton = document.createElement("a");
@@ -168,6 +152,43 @@ function endGame() {
    clearButton.setAttribute("class", "btn");
    scoresBoxEl.appendChild(clearButton);
    
+   var inputValEl = document.getElementById("inputVal");
+   var submitButtonEl = document.getElementById("submitButton");
+   var scoreListEl = document.querySelector(".scoreList");
+   
+
+   var itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+
+   localStorage.setItem('items', JSON.stringify(itemsArray));
+   var data = JSON.parse(localStorage.getItem('items'));
+   
+   var liMaker = (text) => {
+   var li = document.createElement('li');
+   li.textContent = text + ` - ${remainTime}`;
+   scoreListEl.appendChild(li);
+   }
+
+   submitButtonEl.addEventListener("click", highScores);
+   submitButtonEl.addEventListener("click", iAmTired);
+   function iAmTired() {
+   itemsArray.push(inputValEl.value);
+   localStorage.setItem('items', JSON.stringify(itemsArray));
+   liMaker(inputValEl.value);
+   inputValEl.value = "";
+};
+
+   data.forEach(item => {
+      liMaker(item);
+   });
+   
+   
+   clearButton.addEventListener('click', function () {
+      localStorage.clear();
+      while (scoreListEl.firstChild) {
+         scoreListEl.removeChild(scoreListEl.firstChild);
+      }
+      itemsArray = [];
+   });
    
    function highScores() {
       pageTitleEl.textContent = "High Scores";
@@ -175,42 +196,14 @@ function endGame() {
       formBoxEl.style.display = "none";
       scoresBoxEl.style.display = "";
       scoreEl.style.display = "none";
-   };
    
-   submitButton.addEventListener("click", highScores);
-   // ----------  Local Storage  ---------- //
-   var inputValueEl = document.getElementById("inputValue");
-   var submitButtonEl = document.getElementById("submitButton");
-   var scoreIndexEl = document.getElementById("scoreIndex")
-
-   submitButtonEl.onclick = function () {
-      var value = inputValueEl.value;
-
-      console.log(value);
-      scoreIndexEl.innerHTML += `${value} - ${remainTime}`;
+      var scoreIndexEl = document.querySelector(".scoreIndex");
    };
-
-
-
-
-   // for (let i = 0; i < localStorage.length; i++) {
-   //    var value = localStorage.getItem.value(i);
-
-   //    scoreIndexEl.innerHTML += `${value}`;
-
-   //    console.log(value);
-      
-      
-   // }
-   
    
    // ----------  Clear Button  ---------- //
    clearButton.addEventListener("click", function() {
       localStorage.clear();
-      // while (scoreList.firstChild) {
-      //    scoreList.removeChild(scoreList.firstChild);
-      // }
-      itemsArray = [];
+      reloadPage();
    });
    
    // ----------  Back Button  ---------- //
@@ -220,18 +213,3 @@ function endGame() {
    backButton.addEventListener("click", reloadPage);
    
 };
-
-console.log(localStorage);
-      
-      
-      
-      
-      
-      
-
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
-// ----------  TIMER  ---------- //
