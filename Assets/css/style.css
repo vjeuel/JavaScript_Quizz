@@ -88,6 +88,7 @@ main {
 .btn {
    font-family: 'Merriweather', serif;
    width: 30rem;
+   height: 6.5rem;
    padding: 1.25rem 5rem;
    background-color: #F28705;
    border-radius: 1rem;

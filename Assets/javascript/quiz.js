@@ -29,7 +29,7 @@ var boxEl = document.getElementById("box");
 var timerEl = document.getElementById("timer");
 var buttonsBoxEl = document.getElementById("buttonsBox")
 var formBoxEl = document.getElementById("formBox")
-var scoresBoxEl = document.getElementById("scoresBox")
+var scoresBoxEl = document.getElementById("scoresBox");
 
 
 
@@ -44,13 +44,13 @@ var scoreEl = document.querySelector(".score");
 // ----------  Other Variables  ---------- //
 var currentQuestionIndex = 0;
 
-// document.querySelector(".introButton").on("click", startGame);
-
 // ----------  TIMER  ---------- //
-var remainTime = 50;
+var remainTime = 90;
+// document.querySelector(".introButton").onclick = startCountdown;
+var startCountdown = "";
+
 function timer() {
-document.querySelector(".introButton").onclick = startCountdown;
-var startCountdown =
+startCountdown =
    setInterval(function () {
       countTimer()
    }, 1000);
@@ -75,23 +75,26 @@ function firstPage() {
 firstPage();
 
 // ----------  START GAME  ---------- //
-introButtonEl.addEventListener("click", endGame);
+// introButtonEl.addEventListener("click", endGame);
 // introButtonEl.addEventListener("click", highScores);
-// introButtonEl.addEventListener("click", timer);
-// introButtonEl.addEventListener("click", startGame);
+introButtonEl.addEventListener("click", timer);
+introButtonEl.addEventListener("click", startGame);
 
 
 function startGame() {
    // ----------  Show Questions  ---------- //
    function showQuestion() {
+      var currentQuestion = questions[currentQuestionIndex];
       if (currentQuestionIndex == questions.length) {
          endGame();
-      };
-      var currentQuestion = questions[currentQuestionIndex];
+         return;
+      }
       
       buttonsBoxEl.innerHTML = "";
       
       questionsEl.textContent = currentQuestion.question;
+      
+      console.log(currentQuestionIndex);
       currentQuestion.answers.forEach(function (choice, i) {
          var optionNode = document.createElement("button");
          
@@ -119,11 +122,9 @@ function startGame() {
                optionNode.style.color = "#C9EBF2";
                optionNode.textContent = "WRONG";
                currentQuestionIndex++;
-            }
-            
+            }; 
             setTimeout(showQuestion, 400);
          };
-         
       });
    };
    showQuestion();
@@ -131,121 +132,102 @@ function startGame() {
 
 // ----------  GAME END  ---------- //
 function endGame() {
-   // clearInterval(startCountdown);
    buttonsBoxEl.style.display = "none";
    introButtonEl.style.display = "none";
-   // scoresBoxEl.style.display = "none";
+   scoresBoxEl.style.display = "none";
    formBoxEl.style.display = "";
    pageTitleEl.textContent = "Well Done!!!";
    scoreEl.textContent = `${remainTime} is your score!`;
-   timerEl.textContent = "";
+   timerEl.style.display = "none";
+   clearInterval(startCountdown);
    
-   // ----------  Creating the Form  ---------- //
-   var input = document.createElement("input");
-   input.type = "text";
-   input.name = "initials";
-   input.placeholder = "enter your initials"
-   formBoxEl.appendChild(input);
+   // // ----------  Creating the Form  ---------- //
+   // var inputForm = document.createElement("input"); //add ID or class | Global scope
+   // inputForm.type = "text";
+   // // input.name = "initials";
+   // inputForm.placeholder = "enter your initials"
+   // formBoxEl.appendChild(inputForm);
    
-   var submitButton = document.createElement("a");
-   submitButton.type = "submit";
-   submitButton.textContent = "submit";
-   submitButton.setAttribute("class", "btn");
-   formBoxEl.appendChild(submitButton);
-
-   submitButton.addEventListener("click", highScoresPage);
-   
+   // var submitButton = document.createElement("a");
+   // submitButton.type = "submit";
+   // submitButton.textContent = "submit";
+   // submitButton.setAttribute("class", "btn");
+   // formBoxEl.appendChild(submitButton);
    
    
-   // ----------  SCORES  ---------- //
-   function highScoresPage() {
-      // scoresBoxEl.style.display
-      submitButton.addEventListener("click", highScores);
+   //----------  SCORES  ---------- //
+   var backButton = document.createElement("a");
+   backButton.type = "submit";
+   backButton.textContent = "Go Back";
+   backButton.setAttribute("class", "btn");
+   scoresBoxEl.appendChild(backButton);
    
-      var backButton = document.createElement("a");
-      backButton.type = "submit";
-      backButton.textContent = "Go Back";
-      backButton.setAttribute("class", "btn");
-      scoresBoxEl.appendChild(backButton);
-      
-      var clearButton = document.createElement("a");
-      clearButton.type = "submit";
-      clearButton.textContent = "Clear Scores";
-      clearButton.setAttribute("class", "btn");
-      scoresBoxEl.appendChild(clearButton);
-      
-      function highScores() {
-         pageTitleEl.textContent = "High Scores";
-         introButtonEl.style.display = "none";
-         formBoxEl.style.display = "none";
-      
-         // form = scoresBoxEl
-         // ul = scoreListEl
-         // button = submitButton
-         // input = input
-         // liMaker = scoreList
-         // text = list
-         // items = scores
-      
-         // ----------  Local Storage  ---------- //
-         var scoresArray = [];
-         if (localStorage.getItem("scores")) {
-            scores = JSON.parse(localStorage.getItem("scores"))
-         } else {
-            scoresArray = [];
-         };
-         
-         localStorage.setItem("scores", JSON.stringify(scoresArray));
-         var scoreData = JSON.parse(localStorage.getItem("scores"));
-
-         var scoreList = list => {
-            var li = document.createElement("li");
-            li.textContent = list;
-            scoreListEl.appendChild(li);
-         };
-         
-         submitButton.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            scoresArray.push(initials.value);
-            scoreList(initials.value);
-            initials.value = "";
-         });
-         
-         scoreData.forEach(input => {
-            scoreList(input)
-         });
-         
-         // ----------  Clear Button  ---------- //
-         clearButton.addEventListener("click", function() {
-            localStorage.clear();
-            while (scoreList.firstChild) {
-               scoreList.removeChild(scoreList.firstChild);
-            }
-            scoresArray = [];
-         });
-         
-         // ----------  Clear Button  ---------- //
-         function reloadPage() {
-            var reload = window.location.href = "./index.html";
-         };
-         backButton.addEventListener("click", reloadPage);
-         // Title
-         // Scores list
-         // 2 Buttons - Go back and Clear High Scores
-      };
+   var clearButton = document.createElement("a");
+   clearButton.type = "submit";
+   clearButton.textContent = "Clear Scores";
+   clearButton.setAttribute("class", "btn");
+   scoresBoxEl.appendChild(clearButton);
+   
+   
+   function highScores() {
+      pageTitleEl.textContent = "High Scores";
+      introButtonEl.style.display = "none";
+      formBoxEl.style.display = "none";
+      scoresBoxEl.style.display = "";
+      scoreEl.style.display = "none";
    };
+   
+   submitButton.addEventListener("click", highScores);
+   // ----------  Local Storage  ---------- //
+   var inputValueEl = document.getElementById("inputValue");
+   var submitButtonEl = document.getElementById("submitButton");
+   var scoreIndexEl = document.getElementById("scoreIndex")
+
+   submitButtonEl.onclick = function () {
+      var value = inputValueEl.value;
+
+      console.log(value);
+      scoreIndexEl.innerHTML += `${value} - ${remainTime}`;
+   };
+
+
+
+
+   // for (let i = 0; i < localStorage.length; i++) {
+   //    var value = localStorage.getItem.value(i);
+
+   //    scoreIndexEl.innerHTML += `${value}`;
+
+   //    console.log(value);
+      
+      
+   // }
+   
+   
+   // ----------  Clear Button  ---------- //
+   clearButton.addEventListener("click", function() {
+      localStorage.clear();
+      // while (scoreList.firstChild) {
+      //    scoreList.removeChild(scoreList.firstChild);
+      // }
+      itemsArray = [];
+   });
+   
+   // ----------  Back Button  ---------- //
+   function reloadPage() {
+      window.location.href = "./index.html";
+   };
+   backButton.addEventListener("click", reloadPage);
+   
 };
 
-
-
 console.log(localStorage);
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
 
 // ----------  TIMER  ---------- //
 // ----------  TIMER  ---------- //

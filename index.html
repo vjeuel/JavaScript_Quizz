@@ -16,7 +16,8 @@
       
       <!-- Box for the Intro, Questions, Well done and High Scores -->
       <div id="box">
-         <h2 class="intro questions score"></h2>
+         <h2 class="intro questions score scoreIndex"></h2>
+         <h2 id="scoreIndex"></h2>
       </div>
 
       <!-- Buttons for the questions -->
@@ -29,13 +30,18 @@
 
       <!-- Form for the last page -->
       <div id="formBox">
-
+         <fieldset>
+            <input id="inputValue" type="text" placeholder="enter your initials">
+            <button id="submitButton" class="btn">submit</button>
+         </fieldset>
+         
          <!-- <a class="btn"></a> -->
       </div>
 
       <!-- Scores Box -->
       <div id="scoresBox">
-         <ul</ul>
+
+         <ul class="scoreList"></ul>
       </div>
    </main>
    
