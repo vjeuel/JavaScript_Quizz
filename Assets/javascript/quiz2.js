@@ -126,7 +126,19 @@ function startGame() {
    };
    showQuestion();
 };
+function allStorage() {
 
+    var archive = {}, // Notice change here
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        archive[ keys[i] ] = localStorage.getItem( keys[i] );
+    }
+
+    //console.log(archive);
+   return archive;
+   }
 // ----------  GAME END  ---------- //
 function endGame() {
    buttonsBoxEl.style.display = "none";
@@ -159,8 +171,9 @@ function endGame() {
 
    var itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
-   localStorage.setItem('items', JSON.stringify(itemsArray));
-   var data = JSON.parse(localStorage.getItem('items'));
+   // localStorage.setItem('items', JSON.stringify(itemsArray));
+   //var data = JSON.parse(localStorage.getItem('items'));
+   //var data = allStorage();
    
    var liMaker = (text) => {
    var li = document.createElement('li');
@@ -168,18 +181,47 @@ function endGame() {
    scoreListEl.appendChild(li);
    }
 
+   
+   // allStorage()
+   function renderScores(results) {
+      console.log(results);
+      console.log(results.length);
+      // render all elements
+
+      /*for (let i = 0; i < results.length; i++) {
+         console.log(results[i]);
+         
+         
+      }*/
+
+       /*for (const key in Object.keys(results)) {
+          console.log(results);
+         // console.log(results[value]);
+          
+         //value of the key?
+          //create an li
+          //set the text of li to the key: key.value
+          //render it on the page
+       }*/
+   }
    submitButtonEl.addEventListener("click", highScores);
    submitButtonEl.addEventListener("click", iAmTired);
    function iAmTired() {
-   itemsArray.push(inputValEl.value);
-   localStorage.setItem('items', JSON.stringify(itemsArray));
+   //itemsArray.push(inputValEl.value);
+   var nameInitials = inputValEl.value;
+   //localStorage.setItem('items', JSON.stringify(itemsArray));
+   localStorage.setItem(JSON.stringify(nameInitials), JSON.stringify(remainTime));
    liMaker(inputValEl.value);
+   var results =  allStorage();
+   renderScores( results )
+   //console.log(results);
    inputValEl.value = "";
 };
-
-   data.forEach(item => {
+   //console.log(data);
+   
+   /*data.forEach(item => {
       liMaker(item);
-   });
+   });*/
    
    
    clearButton.addEventListener('click', function () {
@@ -190,12 +232,19 @@ function endGame() {
       itemsArray = [];
    });
    
+   
+
    function highScores() {
+      // var results = allStorage();
+      // console.log(results);
+      
       pageTitleEl.textContent = "High Scores";
       introButtonEl.style.display = "none";
       formBoxEl.style.display = "none";
       scoresBoxEl.style.display = "";
       scoreEl.style.display = "none";
+   
+      var scoreIndexEl = document.querySelector(".scoreIndex");
    };
    
    // ----------  Clear Button  ---------- //
